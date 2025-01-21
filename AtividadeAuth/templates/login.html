@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{% block 'title'%}
+Login
+
+{% endblock%}
+
+{% block 'body' %}
+
+{% if error is not None %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md">
+            <br>
+            <h1>Login</h1>
+            <hr>
+            <form method="POST" action="#">
+                {% csrf_token %}
+                <label>Digite seu usuário:</label>
+                <input class="form-control" type="text" placeholder="Usuário" name="username">
+                <br>
+                <label>Digite seu senha:</label>
+                <input class="form-control" type="password" placeholder="Senha" name="password">
+                <br>
+                <input class="btn btn-success btn-lg" type="submit">
+                <a href="{% url 'register' %}" class="btn btn-info btn-lg">Cadastre-se</a> 
+            </form>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
