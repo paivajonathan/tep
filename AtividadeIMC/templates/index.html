@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        form {
+            border: 1px solid black;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        #table-form tr td:first-child {
+            text-align: right;
+        }
+
+        #table-result td {
+            padding: .5rem;
+            border: 0;
+            margin: 0;
+        }
+
+        #table-result tr:first-child td:first-child {
+            border-top-left-radius: 10px;
+        }
+        #table-result tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+        #table-result tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+        #table-result tr:first-child td:last-child {
+            border-top-right-radius: 10px;
+        }
+        
+        #table-result tr:nth-child(even) td {
+            background-color: rgb(116, 116, 116);
+        }
+        
+        #table-result tr:nth-child(odd) td {
+            background-color: rgb(164, 164, 165);
+        }
+
+        #table-result tr:first-child td {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <table id="table-form">
+
+            <tr>
+                <td>
+                    <label for="height">Altura (m)</label>
+                </td>
+                <td>
+                    <input type="number" step="0.01" name="height" placeholder="Ex.: 1.65"> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="weight">Peso (Kg)</label>
+                </td>
+                <td>
+                    <input type="number" step="1" name="weight" placeholder="Ex.: 70">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button>Enviar</button>
+                </td>
+                <td>
+                    <input type="reset" value="Limpar">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% if result is not None %}
+
+    <p>
+        O seu IMC é: {{ result }}
+    </p>
+
+    {% endif %}
+
+    <table id="table-result">
+        <tr>
+            <td>
+                IMC
+            </td>
+            <td>
+                CLASSIFICAÇÃO
+            </td>
+            <td>
+                OBESIDADE (GRAU)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MENOR QUE 18,5
+            </td>
+            <td>
+                MAGREZA
+            </td>
+            <td>
+                O
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ENTRE 18,5 E 24,9
+            </td>
+            <td>
+                NORMAL
+            </td>
+            <td>
+                O
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ENTRE 25,0 E 29,9
+            </td>
+            <td>
+                SOBREPESO
+            </td>
+            <td>
+                I
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ENTRE 30,0 E 39,9
+            </td>
+            <td>
+                OBESIDADE
+            </td>
+            <td>
+                II
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MAIOR QUE 40,0
+            </td>
+            <td>
+                OBESIDADE GRAVE
+            </td>
+            <td>
+                III
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
