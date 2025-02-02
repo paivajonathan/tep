@@ -1,0 +1,110 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        body {
+            background-color: rgb(241, 144, 64);
+            font-family: 'Inter', Arial, Helvetica, sans-serif;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        p,
+        li {
+            font-weight: bold;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card {
+            border: 1px solid black;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .card-body {
+            padding: .5rem;
+        }
+
+        .card p {
+            text-align: center;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(235, 197, 72);
+            padding: .5rem 0;
+            border-bottom: 1px solid black;
+        }
+
+        .card-header div {
+            border: 5px solid transparent;
+            padding: 0 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">CRONOGRAMA SEMANA DA JUVENTUDE</h1>
+
+    <div class="cards-container">
+        {% for schedule in schedules %}
+        <div class="card">
+            <div class="card-header">
+                {% if schedule.is_today %}
+                <div style="border: 5px solid orange; padding: 0 1rem;">
+                    {{ schedule.weekday }} <br>
+                    {{ schedule.date | readable_date }}
+                </div>
+                {% else %}
+                <div>
+                    {{ schedule.weekday }} <br>
+                    {{ schedule.date | readable_date }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <p>
+                    {{ schedule.title | uppercaseify }}
+                </p>
+                <ul>
+                    {% if schedule.place %}
+                    <li>
+                        Local: {{ schedule.place }}
+                    </li>
+                    {% endif %}
+                    <li>
+                        Horário: {{ schedule.time | readable_time }}
+                    </li>
+                </ul>
+                <p>
+                    {{ schedule.observation }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
