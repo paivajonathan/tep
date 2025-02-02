@@ -1,0 +1,55 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistema de Cálculos de Combustível</h1>
+    <fieldset>
+        <legend>Consumo</legend>
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="car">Carro:</label>
+            <input type="text" name="car"> <br>
+            
+            <label for="value">Valor:</label>
+            <input type="number" name="value"> <br>
+            
+            <label for="currentkm">Km Atual:</label>
+            <input type="number" name="currentkm"> <br>
+            
+            <input type="radio" name="fueltype" value="ALC"> Alcool {{ alcohol_price | moneyify }} <input type="radio" name="fueltype" value="GAS"> Gasolina {{ gasoline_price | moneyify }} <br>
+            
+            <input type="submit" value="Calcular">
+        </form>
+    </fieldset>
+    <hr>
+    <fieldset>
+        <legend>Resultado</legend>
+        {% if success %}
+            <p>
+                Seu <strong>{{ car }}</strong> irá rodar <strong>{{ possiblekm | kilometerify }}</strong>, com <strong>{{ value | moneyify }}</strong>, e terá <strong>{{ totalkm | kilometerify }}</strong>   
+            </p>
+        {% endif %}
+    </fieldset>
+    <p>* Observação:</p>
+    <ul>
+        <li>
+            O carro a álcool roda {{ alcohol_car_consumption | kilometerify }} por litro
+        </li>
+        <li>
+            O carro a gasolina roda {{ gasoline_car_consumption | kilometerify }} por litro
+        </li>
+    </ul>
+</body>
+</html>
