@@ -1,0 +1,38 @@
+{
+  "data": "06/02/2025",
+  "alunos": [
+    {
+      "nome": "John",
+      "notas": [
+        6.32,
+        5.97,
+        9.26,
+        6.11
+      ],
+      "media": 6.92,
+      "situacao": "Reprovado"
+    },
+    {
+      "nome": "Mary",
+      "notas": [
+        4.03,
+        5.99,
+        6.75,
+        9.2
+      ],
+      "media": 6.49,
+      "situacao": "Reprovado"
+    },
+    {
+      "nome": "Joseph",
+      "notas": [
+        3.79,
+        7.81,
+        8.79,
+        9.8
+      ],
+      "media": 7.55,
+      "situacao": "Aprovado"
+    }
+  ]
+}
