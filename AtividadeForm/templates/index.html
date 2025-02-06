@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'create' %}">Ir para create</a>
+
+    <table border="1">
+        {% for p in people %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.role }}</td>
+            <td>{{ p.date_birth }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>Empty</td>
+            <td>Empty</td>
+            <td>Empty</td> 
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
